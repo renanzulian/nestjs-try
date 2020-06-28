@@ -19,9 +19,16 @@ export class UsersService {
         const result = await this.userRepository.save(newUser);
         resolve(result);
       } catch (error) {
-        console.error(error);
         reject(error);
       }
     });
+  }
+
+  findOneUser(id: number): Promise<Users> {
+    return this.userRepository.findOne(id);
+  }
+
+  findAllActiveUsers(): Promise<Users[]> {
+    return this.userRepository.find({ where: { isActive: true } });
   }
 }
