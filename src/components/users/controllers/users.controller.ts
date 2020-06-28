@@ -9,7 +9,7 @@ import {
   ConflictException,
 } from '@nestjs/common';
 import { CreateUser, FindOneUser, ManyUsersResponse } from '../utils/users.dto';
-import { Users } from '../models/users.entity';
+import { User } from '../models/user.entity';
 import { UsersService } from '../services/users.service';
 
 @Controller('users')
@@ -30,7 +30,7 @@ export class UsersController {
   }
 
   @Get(':userId')
-  async view(@Param() params: FindOneUser): Promise<void | Users> {
+  async view(@Param() params: FindOneUser): Promise<void | User> {
     const { userId } = params;
     return this.usersService
       .findOneUser(userId)
@@ -43,7 +43,7 @@ export class UsersController {
   }
 
   @Post()
-  async store(@Body() user: CreateUser): Promise<Users> {
+  async store(@Body() user: CreateUser): Promise<User> {
     const { email, password } = user;
     return this.usersService
       .createUserDefault(email, password)

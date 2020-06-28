@@ -1,5 +1,5 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { Users } from '../../components/users/models/users.entity';
+import { User } from '../../components/users/models/user.entity';
 
 export class Sql {
   static getConnection(): TypeOrmModuleOptions {
@@ -10,7 +10,7 @@ export class Sql {
           database: 'test/sqlite.db',
           synchronize: true,
           autoLoadEntities: true,
-          entities: [Users],
+          entities: [User],
         };
         break;
       default:
@@ -21,7 +21,7 @@ export class Sql {
             'postgres://postgres:psql@localhost/postgres',
           synchronize: true,
           autoLoadEntities: true,
-          entities: [Users],
+          entities: [User],
         };
         break;
     }

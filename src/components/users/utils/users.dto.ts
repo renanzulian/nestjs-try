@@ -5,7 +5,7 @@ import {
   IsInt,
   IsNumberString,
 } from 'class-validator';
-import { Users } from '../models/users.entity';
+import { User } from '../models/user.entity';
 export class CreateUser {
   @IsEmail()
   readonly email: string;
@@ -20,5 +20,5 @@ export class FindOneUser {
 }
 
 export class ManyUsersResponse {
-  users: Users[];
+  users: User[];
 }

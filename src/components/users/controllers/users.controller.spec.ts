@@ -2,11 +2,11 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { UsersController } from './users.controller';
 import { UsersService } from '../services/users.service';
 import { Repository } from 'typeorm';
-import { Users } from '../models/users.entity';
+import { User } from '../models/user.entity';
 
 describe('Users Controller', () => {
   let controller: UsersController;
-  let repositoryMock: MockType<Repository<Users>>;
+  let repositoryMock: MockType<Repository<User>>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
