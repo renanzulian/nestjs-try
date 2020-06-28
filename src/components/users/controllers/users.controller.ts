@@ -44,9 +44,9 @@ export class UsersController {
 
   @Post()
   async store(@Body() user: CreateUser): Promise<User> {
-    const { email, password } = user;
+    const { email, password, ...profile } = user;
     return this.usersService
-      .createUserDefault(email, password)
+      .createUserDefault(email, password, profile)
       .then(result => result)
       .catch(error => {
         console.log(error);

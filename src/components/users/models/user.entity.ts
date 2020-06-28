@@ -4,7 +4,10 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToOne,
+  JoinColumn,
 } from 'typeorm';
+import { Profile } from './profile.entity';
 
 @Entity('users')
 export class User {
@@ -19,6 +22,10 @@ export class User {
 
   @Column({ name: 'is_active', default: true })
   isActive: boolean;
+
+  @OneToOne(() => Profile)
+  @JoinColumn()
+  profile: Profile;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
