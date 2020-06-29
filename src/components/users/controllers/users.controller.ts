@@ -5,7 +5,6 @@ import {
   Post,
   Body,
   InternalServerErrorException,
-  BadRequestException,
   ConflictException,
 } from '@nestjs/common';
 import { CreateUser, FindOneUser, ManyUsersResponse } from '../utils/users.dto';
@@ -44,12 +43,10 @@ export class UsersController {
 
   @Post()
   async store(@Body() user: CreateUser): Promise<User> {
-    const { email, password, ...profile } = user;
     return this.usersService
-      .createUserDefault(email, password, profile)
+      .createUser(user)
       .then(result => result)
       .catch(error => {
-        console.log(error);
         if (error.code == '23505') {
           throw new ConflictException(error.detail);
         } else {

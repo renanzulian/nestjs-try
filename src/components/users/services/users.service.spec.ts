@@ -3,10 +3,12 @@ import { UsersService } from './users.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { User } from '../models/user.entity';
 import { Repository } from 'typeorm';
+import { Profile } from '../models/profile.entity';
 
 describe('UsersService', () => {
   let service: UsersService;
-  let repositoryMock: MockType<Repository<User>>;
+  let userMock: MockType<Repository<User>>;
+  let profileMock: MockType<Repository<Profile>>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -16,11 +18,16 @@ describe('UsersService', () => {
           provide: getRepositoryToken(User),
           useFactory: repositoryMockFactory,
         },
+        {
+          provide: getRepositoryToken(Profile),
+          useFactory: repositoryMockFactory,
+        },
       ],
     }).compile();
 
     service = module.get<UsersService>(UsersService);
-    repositoryMock = module.get(getRepositoryToken(User));
+    userMock = module.get(getRepositoryToken(User));
+    profileMock = module.get(getRepositoryToken(Profile));
   });
 
   it('should be defined', () => {

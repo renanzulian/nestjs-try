@@ -24,7 +24,7 @@ export class User {
   isActive: boolean;
 
   @OneToOne(() => Profile)
-  @JoinColumn()
+  @JoinColumn({ name: 'profile_id' })
   profile: Profile;
 
   @CreateDateColumn({ name: 'created_at' })
